@@ -116,20 +116,23 @@
                                 <tr>
                                     <th>Products</th>
                                     <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
                                     <th>Remove</th>
                                 </tr>
                             </thead>
                             <tbody class="align-middle">
-                                <tr>
-                                    <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                                    <td class="align-middle">$150</td>
+                                <tr v-for="lessonInCart in lessonsInCart">
                                     <td class="align-middle">
-                                        3
+                                        <img v-bind:src="lessonInCart.image" style="width: 50px;">
+                                        {{lessonInCart.subject}}
                                     </td>
-                                    <td class="align-middle">$150</td>
-                                    <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                    <td class="align-middle">
+                                        {{lessonInCart.price}}
+                                    </td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-primary" v-on:click="removeFromCart(lessonInCart)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -179,11 +182,20 @@
                 cart: [],
                 sortBy: "",
                 orderBy: "ascending",
-                showShopPage: true
+                showShopPage: true,
+                lessonsInCart: [],
             },
             methods: {
                 addToCart(lesson){
                     this.cart.push(lesson.id);
+                    this.lessonsInCart.push(lesson);
+                },
+                removeFromCart(lesson){
+                    let lessonIndex = this.cart.indexOf(lesson.id);
+                    if (lessonIndex !== -1){
+                        this.cart.splice(lessonIndex, 1);
+                        this.lessonsInCart.splice(lessonIndex, 1);
+                    }
                 },
                 canAddToCart(lesson){
                     return lesson.spaces > this.cartCount(lesson.id);
