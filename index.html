@@ -30,7 +30,9 @@
                 <div class="col-lg-3 col-6 text-right">
                     <a href="" class="btn border">
                         <i class="fas fa-shopping-cart text-primary"></i>
-                        <span class="badge">0</span>
+                        <span class="badge">
+                            {{cartItemCount}}
+                        </span>
                     </a>
                 </div>
             </div>
@@ -94,10 +96,10 @@
                                         <span>Stock: {{product.stock}}</span>
                                     </div>
                                     <div class="card-footer bg-light border text-center">
-                                        <a href="" class="btn btn-sm text-dark p-0">
+                                        <button class="btn btn-sm text-dark p-0" v-on:click="addToCart(product)">
                                                 <i class="fas fa-shopping-cart text-primary mr-1"></i>
                                                 Add To Cart
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +123,18 @@
             data: {
                 sitename: "CW1-CST3145",
                 products: products,
+                cart: [],
             },
+            methods: {
+                addToCart(product){
+                    this.cart.push(product.id);
+                },
+            },
+            computed: {
+                cartItemCount() {
+                    return this.cart.length;
+                },
+            }
         });
     </script>
 </body>
