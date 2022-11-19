@@ -12,7 +12,7 @@
     <link href="css/style.css" rel="stylesheet">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
-    <script src="js/products.js"></script>
+    <script src="js/lessons.js"></script>
 </head>
 <body>
     <div id="app">
@@ -83,20 +83,20 @@
                             </div>
                         </div>
                        
-                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1" v-for="product in products">
+                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1" v-for="lesson in lessons">
                                 <div class="card product-item border-0 mb-4">
                                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                        <img class="img-fluid w-100" v-bind:src="product.image" v-bind:alt="product.subject">
+                                        <img class="img-fluid w-100" v-bind:src="lesson.image" v-bind:alt="lesson.subject">
                                     </div>
                                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                        <h6 class="text-truncate mb-3">{{product.subject}} | {{product.location}}</h6>
+                                        <h6 class="text-truncate mb-3">{{lesson.subject}} | {{lesson.location}}</h6>
                                         <div class="d-flex justify-content-center">
-                                            <h6>${{product.price}}</h6><h6 class="text-muted ml-2"></h6>
+                                            <h6>${{lesson.price}}</h6><h6 class="text-muted ml-2"></h6>
                                         </div>
-                                        <span>Spaces: {{product.spaces - cartCount(product.id)}}</span>
+                                        <span>Spaces: {{lesson.spaces - cartCount(lesson.id)}}</span>
                                     </div>
                                     <div class="card-footer bg-light border text-center">
-                                        <button class="btn btn-sm text-dark p-0" v-on:click="addToCart(product)" v-bind:disabled="!canAddToCart(product)">
+                                        <button class="btn btn-sm text-dark p-0" v-on:click="addToCart(lesson)" v-bind:disabled="!canAddToCart(lesson)">
                                                 <i class="fas fa-shopping-cart text-primary mr-1"></i>
                                                 Add To Cart
                                         </button>
@@ -125,15 +125,15 @@
             el: "#app",
             data: {
                 sitename: "CW1-CST3145",
-                products: products,
+                lessons: lessons,
                 cart: [],
             },
             methods: {
-                addToCart(product){
-                    this.cart.push(product.id);
+                addToCart(lesson){
+                    this.cart.push(lesson.id);
                 },
-                canAddToCart(product) {
-                    return product.spaces > this.cartCount(product.id);
+                canAddToCart(lesson) {
+                    return lesson.spaces > this.cartCount(lesson.id);
                 },
                 cartCount(id) {
                     let count = 0;
