@@ -28,18 +28,18 @@
                 <div class="col-lg-6 col-6 text-left">
                 </div>
                 <div class="col-lg-3 col-6 text-right">
-                    <a href="" class="btn border">
+                    <button class="btn border" v-bind:disabled="!cartItemCount" v-on:click="showCartAndCheckout">
                         <i class="fas fa-shopping-cart text-primary"></i>
                         <span class="badge">
                             {{cartItemCount}}
                         </span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     
     
-        <div class="container-fluid pt-5">
+        <div class="container-fluid pt-5" v-if="showShopPage">
             <div class="row px-xl-5">
                 <div class="col-lg-3 col-md-12">
                     <div class="border-bottom mb-4 pb-4">
@@ -107,9 +107,59 @@
                 </div>
             </div>
         </div>
-        
-        <div>
-            Checkout
+        <div v-else>
+            <div class="container-fluid pt-5">
+                <div class="row px-xl-5">
+                    <div class="col-lg-8 table-responsive mb-5">
+                        <table class="table table-bordered text-center mb-0">
+                            <thead class="bg-secondary text-dark">
+                                <tr>
+                                    <th>Products</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                <tr>
+                                    <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
+                                    <td class="align-middle">$150</td>
+                                    <td class="align-middle">
+                                        3
+                                    </td>
+                                    <td class="align-middle">$150</td>
+                                    <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card border-secondary mb-5">
+                            <div class="card-header bg-secondary border-0">
+                                <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3 pt-1">
+                                    <h6 class="font-weight-medium">Subtotal</h6>
+                                    <h6 class="font-weight-medium">$150</h6>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-medium">Shipping</h6>
+                                    <h6 class="font-weight-medium">$0</h6>
+                                </div>
+                            </div>
+                            <div class="card-footer border-secondary bg-transparent">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5 class="font-weight-bold">Total</h5>
+                                    <h5 class="font-weight-bold">$160</h5>
+                                </div>
+                                <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="col-12 text-center">
@@ -128,7 +178,8 @@
                 lessons: lessons,
                 cart: [],
                 sortBy: "",
-                orderBy: "ascending"
+                orderBy: "ascending",
+                showShopPage: true
             },
             methods: {
                 addToCart(lesson){
@@ -146,6 +197,9 @@
                     }
                     return count;
                 },
+                showCartAndCheckout() { 
+                    this.showShopPage = this.showShopPage ? false : true;
+                }
             },
             computed: {
                 cartItemCount(){
@@ -154,10 +208,12 @@
                 sortedLessons(){
                     let lessonsArray = this.lessons.slice(0);
                     const compare = (a, b) => {
-                        if (a[this.sortBy] > b[this.sortBy])
+                        if (a[this.sortBy] > b[this.sortBy]){
                             return 1;
-                        if (a[this.sortBy] < b[this.sortBy])
+                        } 
+                        if (a[this.sortBy] < b[this.sortBy]){
                             return -1;
+                        }
                         return 0;
                     };
                     if(this.orderBy === "ascending"){
