@@ -25,7 +25,7 @@ let products = [
     },
     {
         id: 1004,
-        subject: "Advanced Web Development",
+        subject: "Advanced Web Dev",
         location: "Dubai",
         price: 3000,
         stock: 10,
@@ -33,7 +33,7 @@ let products = [
     },
     {
         id: 1005,
-        subject: "Advanced Web Development",
+        subject: "Advanced Web Dev",
         location: "London",
         price: 4000,
         stock: 10,
@@ -41,7 +41,7 @@ let products = [
     },
     {
         id: 1006,
-        subject: "Advanced Web Development",
+        subject: "Advanced Web Dev",
         location: "Mauritius",
         price: 2500,
         stock: 10,
