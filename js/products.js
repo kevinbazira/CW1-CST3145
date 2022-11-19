@@ -4,7 +4,7 @@ let products = [
         subject: "Artificial Intelligence",
         location: "Dubai",
         price: 4000,
-        stock: 10,
+        spaces: 10,
         image: "img/artificial-intelligence.png"
     },
     {
@@ -12,7 +12,7 @@ let products = [
         subject: "Artificial Intelligence",
         location: "London",
         price: 5000,
-        stock: 10,
+        spaces: 10,
         image: "img/artificial-intelligence.png"
     },
     {
@@ -20,7 +20,7 @@ let products = [
         subject: "Artificial Intelligence",
         location: "Mauritius",
         price: 3000,
-        stock: 10,
+        spaces: 10,
         image: "img/artificial-intelligence.png"
     },
     {
@@ -28,7 +28,7 @@ let products = [
         subject: "Advanced Web Dev",
         location: "Dubai",
         price: 3000,
-        stock: 10,
+        spaces: 10,
         image: "img/advanced-web-development.png"
     },
     {
@@ -36,7 +36,7 @@ let products = [
         subject: "Advanced Web Dev",
         location: "London",
         price: 4000,
-        stock: 10,
+        spaces: 10,
         image: "img/advanced-web-development.png"
     },
     {
@@ -44,7 +44,7 @@ let products = [
         subject: "Advanced Web Dev",
         location: "Mauritius",
         price: 2500,
-        stock: 10,
+        spaces: 10,
         image: "img/advanced-web-development.png"
     },
     {
@@ -52,7 +52,7 @@ let products = [
         subject: "Mobile Development",
         location: "Dubai",
         price: 6500,
-        stock: 10,
+        spaces: 10,
         image: "img/mobile-development.png"
     },
     {
@@ -60,7 +60,7 @@ let products = [
         subject: "Mobile Development",
         location: "London",
         price: 8000,
-        stock: 10,
+        spaces: 10,
         image: "img/mobile-development.png"
     },
     {
@@ -68,7 +68,7 @@ let products = [
         subject: "Mobile Development",
         location: "Mauritius",
         price: 5500,
-        stock: 10,
+        spaces: 10,
         image: "img/mobile-development.png"
     },
     {
@@ -76,7 +76,7 @@ let products = [
         subject: "Big Data",
         location: "Dubai",
         price: 10000,
-        stock: 10,
+        spaces: 10,
         image: "img/big-data.jpg"
     }
 ];

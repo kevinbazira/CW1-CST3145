@@ -93,21 +93,24 @@
                                         <div class="d-flex justify-content-center">
                                             <h6>${{product.price}}</h6><h6 class="text-muted ml-2"></h6>
                                         </div>
-                                        <span>Stock: {{product.stock}}</span>
+                                        <span>Spaces: {{product.spaces - cartCount(product.id)}}</span>
                                     </div>
                                     <div class="card-footer bg-light border text-center">
-                                        <button class="btn btn-sm text-dark p-0" v-on:click="addToCart(product)">
+                                        <button class="btn btn-sm text-dark p-0" v-on:click="addToCart(product)" v-bind:disabled="!canAddToCart(product)">
                                                 <i class="fas fa-shopping-cart text-primary mr-1"></i>
                                                 Add To Cart
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    
+        
+        <div>
+            Checkout
+        </div>
         
         <div class="col-12 text-center">
             <p>
@@ -129,6 +132,18 @@
                 addToCart(product){
                     this.cart.push(product.id);
                 },
+                canAddToCart(product) {
+                    return product.spaces > this.cartCount(product.id);
+                },
+                cartCount(id) {
+                    let count = 0;
+                    for (let i = 0; i < this.cart.length; i++) {
+                        if (this.cart[i] === id) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }
             },
             computed: {
                 cartItemCount() {
