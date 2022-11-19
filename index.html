@@ -72,18 +72,18 @@
                                     </div>
                                 </form>
                                 <div class="dropdown ml-4">
-                                    <!-- <p>Sort by: </p> -->
-                                    <select class="form-select btn border dropdown-toggle" aria-label="Default select example">
-                                        <option selected>Sort by</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select btn border dropdown-toggle" aria-label="Sort by: subject, location, price, spaces" v-model="sortBy">
+                                        <option value="">Sort by</option>
+                                        <option value="subject">Subject</option>
+                                        <option value="location">Location</option>
+                                        <option value="price">Price</option>
+                                        <option value="spaces">Spaces</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                        
-                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1" v-for="lesson in lessons">
+                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1" v-for="lesson in sortedLessons">
                                 <div class="card product-item border-0 mb-4">
                                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                         <img class="img-fluid w-100" v-bind:src="lesson.image" v-bind:alt="lesson.subject">
@@ -127,15 +127,16 @@
                 sitename: "CW1-CST3145",
                 lessons: lessons,
                 cart: [],
+                sortBy: ""
             },
             methods: {
                 addToCart(lesson){
                     this.cart.push(lesson.id);
                 },
-                canAddToCart(lesson) {
+                canAddToCart(lesson){
                     return lesson.spaces > this.cartCount(lesson.id);
                 },
-                cartCount(id) {
+                cartCount(id){
                     let count = 0;
                     for (let i = 0; i < this.cart.length; i++) {
                         if (this.cart[i] === id) {
@@ -143,12 +144,23 @@
                         }
                     }
                     return count;
-                }
+                },
             },
             computed: {
-                cartItemCount() {
+                cartItemCount(){
                     return this.cart.length;
                 },
+                sortedLessons(){
+                    let lessonsArray = this.lessons.slice(0);
+                    const compare = (a, b) => {
+                        if (a[this.sortBy] > b[this.sortBy])
+                            return 1;
+                        if (a[this.sortBy] < b[this.sortBy])
+                            return -1;
+                        return 0;
+                    };
+                    return lessonsArray.sort(compare);
+                }
             }
         });
     </script>
