@@ -10,7 +10,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
     <script src="js/lessons.js"></script>
 </head>
@@ -37,7 +36,17 @@
                 </div>
             </div>
         </div>
-    
+        
+        <div class="container-fluid bg-secondary">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 180px">
+                <span v-if="showShopPage">
+                    <h2 class="font-weight-semi-bold text-uppercase mb-3">Shop</h2>
+                </span>
+                <span v-else>
+                    <h2 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart & Checkout</h2>
+                </span>
+            </div>
+        </div>
     
         <div class="container-fluid pt-5" v-if="showShopPage">
             <div class="row px-xl-5">
@@ -96,7 +105,7 @@
                                         <span>Spaces: {{lesson.spaces - cartCount(lesson.id)}}</span>
                                     </div>
                                     <div class="card-footer bg-light border text-center">
-                                        <button class="btn btn-sm text-dark p-0" v-on:click="addToCart(lesson)" v-bind:disabled="!canAddToCart(lesson)">
+                                        <button class="btn btn-sm text-dark p-0 w-100 h-100" v-on:click="addToCart(lesson)" v-bind:disabled="!canAddToCart(lesson)">
                                                 <i class="fas fa-shopping-cart text-primary mr-1"></i>
                                                 Add To Cart
                                         </button>
@@ -121,7 +130,7 @@
                             </thead>
                             <tbody class="align-middle">
                                 <tr v-for="lessonInCart in lessonsInCart">
-                                    <td class="align-middle">
+                                    <td class="text-left">
                                         <img v-bind:src="lessonInCart.image" style="width: 50px;">
                                         {{lessonInCart.subject}} | {{lessonInCart.location}}
                                     </td>
