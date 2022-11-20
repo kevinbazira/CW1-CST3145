@@ -48,7 +48,7 @@
                 </span>
             </div>
         </div>
-    
+
         <div class="container-fluid pt-5" v-if="showShopPage">
             <div class="row px-xl-5">
                 <div class="col-lg-3 col-md-12">
@@ -71,9 +71,9 @@
                     <div class="row pb-3">
                         <div class="col-12 pb-1">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <form action="">
+                                <form class="w-100">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search by name">
+                                        <input type="text" class="form-control" placeholder="Search by subject or location" v-model="searchTerm">
                                         <div class="input-group-append">
                                             <span class="input-group-text bg-transparent text-primary">
                                                 <i class="fa fa-search"></i>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                        
-                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1" v-for="lesson in sortedLessons">
+                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1" v-for="lesson in (searchedLessons.length === 0 ? sortedLessons : searchedLessons)">
                                 <div class="card product-item border-0 mb-4">
                                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                         <img class="img-fluid w-100" v-bind:src="lesson.image" v-bind:alt="lesson.subject">
@@ -199,7 +199,8 @@
                 checkout: {
                     fullName: "",
                     phoneNumber: ""
-                }
+                },
+                searchTerm: ""
             },
             methods: {
                 addToCart(lesson){
@@ -262,6 +263,20 @@
                         lessonsArray.sort(compare);
                         return lessonsArray.reverse();
                     }
+                },
+                searchedLessons(){
+                    let searchedSubjects = [];
+                    if(this.searchTerm !== ""){
+                        for(let i = 0;  i < lessons.length; i++){
+                            let lowerCaseSubjectTitle = lessons[i].subject.toLowerCase();
+                            let lowerCaseSubjectLocation = lessons[i].location.toLowerCase();
+                            let lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+                            if(lowerCaseSubjectTitle.includes(lowerCaseSearchTerm) || lowerCaseSubjectLocation.includes(lowerCaseSearchTerm)){
+                                searchedSubjects.push(lessons[i])
+                            }
+                        }
+                    }
+                    return searchedSubjects;
                 }
             }
         });
