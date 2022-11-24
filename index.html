@@ -40,12 +40,7 @@
 
         <div class="container-fluid bg-secondary">
             <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 180px">
-                <span v-if="showShopPage">
-                    <h2 class="font-weight-semi-bold text-uppercase mb-3">Shop</h2>
-                </span>
-                <span v-else>
-                    <h2 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart & Checkout</h2>
-                </span>
+                <h2 class="font-weight-semi-bold text-uppercase mb-3">{{ showShopPage ? "Shop" : "Shopping Cart & Checkout" }}</h2>
             </div>
         </div>
 
