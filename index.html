@@ -235,14 +235,8 @@
                 },
                 checkoutSubmit(){
                     alert("Order Submitted! :)");
-                }
-            },
-            computed: {
-                cartItemCount(){
-                    return this.cart.length;
                 },
-                sortedLessons(){
-                    let lessonsArray = this.lessons.slice(0);
+                sortLessons(lessonsArray){
                     const compare = (a, b) => {
                         if (a[this.sortBy] > b[this.sortBy]){
                             return 1;
@@ -258,6 +252,15 @@
                         lessonsArray.sort(compare);
                         return lessonsArray.reverse();
                     }
+                }
+            },
+            computed: {
+                cartItemCount(){
+                    return this.cart.length;
+                },
+                sortedLessons(){
+                    let lessonsArray = this.lessons.slice(0);
+                    return this.sortLessons(lessonsArray);
                 },
                 searchedLessons(){
                     let searchedSubjects = [];
@@ -271,7 +274,8 @@
                             }
                         }
                     }
-                    return searchedSubjects;
+                    sortedSearchedSubjects = this.sortLessons(searchedSubjects);
+                    return sortedSearchedSubjects;
                 }
             }
         });
